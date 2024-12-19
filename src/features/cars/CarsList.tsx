@@ -19,7 +19,7 @@ function CarsList() {
       <div className="container">
         <div className="row">
           {
-            cars.map(c => <div className='col-md-4 my-2'>
+            cars.map(c => <div className='col-md-4 my-2' key={c.id}>
               <CarCard car={c} />
             </div>
             )

@@ -4,6 +4,12 @@ import { Car } from './Car'
 
 
 class CarsStore {
+  addCar(car: Car) {
+    this.cars = [...this.cars, car]
+  }
+  removeCar(id: string) {
+    this.cars = this.cars.filter(c => c.id != id)
+  }
 
   baseUrl = 'https://sandbox.codeworksacademy.com/api/cars'
 

@@ -9,8 +9,13 @@ export const carsApi = Axios.create({
 
 
 class CarsService {
+  async deleteCar(id: string) {
+    await carsApi.delete(id)
+    carsStore.removeCar(id)
+  }
   async createCar(carData: CarCreation) {
-    const res = carsApi.post('', carData)
+    const res = await carsApi.post('', carData)
+    carsStore.addCar(res.data)
   }
 
   async getCars() {
