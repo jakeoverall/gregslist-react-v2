@@ -1,10 +1,15 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { Car, CarCreation, getCarCreationObj } from './Car'
 import { carsService } from './CarsService'
+import { ThemeContext } from '../../pages/HomePage'
 
 export default function CarForm() {
 
   const [carData, setCarData] = useState<CarCreation>(getCarCreationObj())
+
+  const value = useContext(ThemeContext)
+
+  console.log('what is the value of the context?', value)
 
 
   async function handleSubmit() {
@@ -34,13 +39,18 @@ export default function CarForm() {
 
   return (
     <form className="CarForm" onSubmit={handleSubmit}>
-
+      <h1>{value}</h1>
       <div className="row">
         <div className="col">
           <div className="form-floating">
             <input type="text" name='make' className='form-control' required placeholder='make' onChange={handleChange} />
             <label htmlFor="make">Make</label>
           </div>
+          <small className='text-danger'>
+            {
+              carData.make.length && carData.make.length < 3 ? `you need to type more  ${carData.make.length}/3` : ''
+            }
+          </small>
         </div>
         <div className="col">
           <div className="form-floating">
