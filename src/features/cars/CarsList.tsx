@@ -16,17 +16,13 @@ function CarsList() {
 
   return (
     <div className="CarsList">
-      <div className="container">
-        <div className="row">
-          {
-            cars.map(c => <div className='col-md-4 my-2' key={c.id}>
-              <CarCard car={c} />
-            </div>
-            )
-          }
-
+      {
+        cars.map(c => <div className='car-card' key={c.id}>
+          <CarCard car={c} />
         </div>
-      </div>
+        )
+      }
+
     </div>
   )
 

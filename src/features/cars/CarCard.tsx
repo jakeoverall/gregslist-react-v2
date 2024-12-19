@@ -3,6 +3,8 @@ import { Car } from './Car';
 import { carsService } from './CarsService';
 import { AxiosError } from 'axios';
 import Swal from 'sweetalert2';
+import { observer } from 'mobx-react';
+import { carsStore } from './CarsStore';
 
 type CarCardProps = {
   car: Car
@@ -38,20 +40,24 @@ export default function CarCard({ car }: CarCardProps) {
         background: 'var(--bs-danger-bg-subtle)'
       })
     }
-
-
   }
+
+  const DeleteButton = observer(() => {
+    return carsStore.userId == car.creatorId
+      ? <button className='btn btn-danger' onClick={deleteCar}>
+        {error ? <span>{error}</span> : ''}
+        <i className="mdi mdi-delete"></i>
+      </button>
+      : <></>
+  })
 
 
   return (
 
     <div className="CarCard card rounded">
       <img className='rounded' src={car.imgUrl} alt={car._id} />
+      <DeleteButton />
 
-      <button className='btn btn-danger' onClick={deleteCar}>
-        {error ? <span>{error}</span> : ''}
-        <i className="mdi mdi-delete"></i>
-      </button>
 
     </div>
   )

@@ -5,6 +5,7 @@ import { accountService } from './AccountService.ts'
 import { api } from './AxiosService.ts'
 import { socketService } from './SocketService.ts'
 import { carsApi } from '../features/cars/CarsService.ts'
+import { carsStore } from '../features/cars/CarsStore.ts'
 
 export const AuthService = initialize({
   domain,

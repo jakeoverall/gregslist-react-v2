@@ -1,4 +1,5 @@
 import { AppState } from '../AppState.js'
+import { carsStore } from '../features/cars/CarsStore.ts'
 import { Account } from '../models/Account.js'
 import { logger } from '../utils/Logger.ts'
 import { api } from './AxiosService.ts'
@@ -18,6 +19,8 @@ class AccountService {
       const res = await api.get('/account')
       AppState.account = new Account(res.data)
       fetching = false
+
+      carsStore.setUserId(AppState.account.id)
       return AppState.account
     } catch (err) {
       logger.error('HAVE YOU STARTED YOUR SERVER YET???')
