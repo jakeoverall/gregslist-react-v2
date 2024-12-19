@@ -6,7 +6,6 @@ import CarCard from './CarCard';
 
 function CarsList() {
 
-
   const cars = carsStore.cars
 
   useEffect(() => {

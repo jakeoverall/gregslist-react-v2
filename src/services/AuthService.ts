@@ -4,6 +4,7 @@ import { audience, clientId, domain } from '../env.ts'
 import { accountService } from './AccountService.ts'
 import { api } from './AxiosService.ts'
 import { socketService } from './SocketService.ts'
+import { carsApi } from '../features/cars/CarsService.ts'
 
 export const AuthService = initialize({
   domain,
@@ -16,6 +17,7 @@ export const AuthService = initialize({
 
 AuthService.on(AUTH_EVENTS.AUTHENTICATED, async function () {
   api.defaults.headers.authorization = AuthService.bearer
+  carsApi.defaults.headers.authorization = AuthService.bearer
   api.interceptors.request.use(refreshAuthToken)
   AppState.identity = AuthService.identity
   await accountService.getAccount()

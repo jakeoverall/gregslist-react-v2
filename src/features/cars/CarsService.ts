@@ -1,13 +1,21 @@
-import { Car } from './Car'
+import Axios from 'axios'
+import { Car, CarCreation } from './Car'
 import { carsStore } from './CarsStore'
+
+export const carsApi = Axios.create({
+  baseURL: carsStore.baseUrl,
+  timeout: 8000
+})
 
 
 class CarsService {
+  async createCar(carData: CarCreation) {
+    const res = carsApi.post('', carData)
+  }
 
   async getCars() {
-    const response = await fetch(carsStore.baseUrl)
-    const cars = await response.json()
-    carsStore.cars = cars
+    const response = await carsApi.get('')
+    carsStore.cars = response.data
   }
 
 
