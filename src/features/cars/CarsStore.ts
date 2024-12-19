@@ -1,13 +1,14 @@
 import { action, makeAutoObservable } from "mobx"
-import { isValidProp } from "./utils/isValidProp.ts"
-import { Account } from './models/Account.js'
-import { Identity } from '@bcwdev/auth0provider-client'
+import { isValidProp } from "../../utils/isValidProp"
+import { Car } from './Car'
 
 
-class ObservableAppState {
+class CarsStore {
 
-  identity: Identity | null = null
-  account: Account | null = null
+  baseUrl = 'https://sandbox.codeworksacademy.com/api/cars'
+
+  cars: Car[] = []
+
 
   constructor() {
     makeAutoObservable(this)
@@ -16,7 +17,7 @@ class ObservableAppState {
 }
 
 
-export const AppState = new Proxy(new ObservableAppState(), {
+export const carsStore = new Proxy(new CarsStore(), {
   get(target, prop: string) {
     isValidProp(target, prop)
     // @ts-ignore
